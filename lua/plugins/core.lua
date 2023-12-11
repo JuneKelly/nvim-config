@@ -6,4 +6,12 @@ return {
       -- colorscheme = "catppuccin",
     },
   },
+  {
+    "folke/neoconf.nvim",
+    opts = {
+      import = {
+        vscode = false,
+      },
+    },
+  },
 }
