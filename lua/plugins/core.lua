@@ -28,7 +28,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     opts = {
-      winopts = { width = 0.94 },
+      winopts = { width = 0.9 },
     },
   },
 }
