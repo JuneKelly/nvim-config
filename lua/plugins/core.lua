@@ -25,4 +25,10 @@ return {
       },
     },
   },
+  {
+    "ibhagwan/fzf-lua",
+    opts = {
+      winopts = { width = 0.94 },
+    },
+  },
 }
