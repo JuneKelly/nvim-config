@@ -4,7 +4,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "catppuccin-macchiato",
       -- colorscheme = function()
       --   local tokyonight = require("tokyonight")
       --   tokyonight.setup({
