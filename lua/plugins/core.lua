@@ -1,10 +1,8 @@
--- core plugin config
-
 return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-macchiato",
+      -- colorscheme = "catppuccin-macchiato",
       -- colorscheme = function()
       --   local tokyonight = require("tokyonight")
       --   tokyonight.setup({
