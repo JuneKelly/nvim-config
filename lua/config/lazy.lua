@@ -16,14 +16,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    -- {
-    --   "catppuccin",
-    --   optional = true,
-    --   opts = function()
-    --     local bufferline = require("catppuccin.groups.integrations.bufferline")
-    --     bufferline.get = bufferline.get or bufferline.get_theme
-    --   end,
-    -- },
+    -- temp fix for catppuccin
+    {
+      "catppuccin",
+      optional = true,
+      opts = function()
+        local bufferline = require("catppuccin.groups.integrations.bufferline")
+        bufferline.get = bufferline.get or bufferline.get_theme
+      end,
+    },
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
