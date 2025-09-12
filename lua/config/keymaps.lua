@@ -4,7 +4,7 @@
 local map = LazyVim.safe_keymap_set
 
 map("n", "<leader>fy", function()
-  vim.fn.setreg(vim.v.register, vim.fn.expand("%"))
+  vim.fn.setreg(vim.v.register, vim.fn.expand("%:."))
 end, { desc = "Yank file path" })
 
 map("n", "<leader>fYy", function()
