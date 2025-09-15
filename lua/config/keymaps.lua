@@ -12,5 +12,5 @@ map("n", "<leader>fYy", function()
 end, { desc = "Yank file path (full)" })
 
 map("n", "<leader>fYl", function()
-  vim.fn.setreg(vim.v.register, vim.fn.expand("%") .. ":" .. vim.fn.line("."))
+  vim.fn.setreg(vim.v.register, vim.fn.expand("%:.") .. ":" .. vim.fn.line("."))
 end, { desc = "Yank file path (with line)" })
