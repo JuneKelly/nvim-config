@@ -18,12 +18,3 @@ features.
 While assisting the user, think hard about the problem first before exploring
 solutions. Search for documentation when necessary to enhance your
 understanding. When faced with complex problems, make a plan before executing.
-
-## Key files
-
-- [/lazyvim.json]: Configuration for LazyVim extras
-- [/lua/plugins/core.lua]: Configuration for specific plugins
-- [/lua/plugins/lsp.lua]: Configuration for lsp
-- [/lua/config/keymaps.lua]: Custom keymaps
-- [/lua/config/lazy.lua]: Main configuration of LazyVim and associated packages
-- [/lua/config/options.lua]: Neovim options and flags
