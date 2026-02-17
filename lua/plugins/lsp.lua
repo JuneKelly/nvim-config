@@ -1,33 +1,37 @@
 return {
   {
-    "mason-org/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "nextls", -- Install Next LS through Mason
-      },
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Disable the default ElixirLS
+        -- Disable default Elixir LSPs
         elixirls = {
-          mason = false, -- Don't install via Mason
-          enabled = false, -- Disable the server
+          mason = false,
+          enabled = false,
         },
-        -- Enable Next LS
         nextls = {
-          mason = true, -- Install via Mason
-          -- Optional settings for Next LS
-          init_options = {
-            experimental = {
-              completions = {
-                enable = true, -- Enable completions
-              },
-            },
-          },
+          mason = false,
+          enabled = false,
         },
+        -- Enable Expert (https://github.com/elixir-lang/expert)
+        expert = {
+          mason = false,
+        },
+      },
+      setup = {
+        expert = function(_, opts)
+          local configs = require("lspconfig.configs")
+          if not configs.expert then
+            configs.expert = {
+              default_config = {
+                cmd = { "expert", "--stdio" },
+                filetypes = { "elixir", "eelixir", "heex" },
+                root_dir = require("lspconfig").util.root_pattern("mix.exs", ".git"),
+              },
+            }
+          end
+          require("lspconfig").expert.setup(opts)
+          return true
+        end,
       },
     },
   },
