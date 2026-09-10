@@ -17,22 +17,6 @@ return {
           mason = false,
         },
       },
-      setup = {
-        expert = function(_, opts)
-          local configs = require("lspconfig.configs")
-          if not configs.expert then
-            configs.expert = {
-              default_config = {
-                cmd = { "expert", "--stdio" },
-                filetypes = { "elixir", "eelixir", "heex" },
-                root_dir = require("lspconfig").util.root_pattern("mix.exs", ".git"),
-              },
-            }
-          end
-          require("lspconfig").expert.setup(opts)
-          return true
-        end,
-      },
     },
   },
 }
