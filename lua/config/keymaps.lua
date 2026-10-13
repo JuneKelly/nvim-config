@@ -14,3 +14,13 @@ end, { desc = "Yank file path (full)" })
 map("n", "<leader>fYl", function()
   vim.fn.setreg(vim.v.register, vim.fn.expand("%:.") .. ":" .. vim.fn.line("."))
 end, { desc = "Yank file path (with line)" })
+
+if vim.g.neovide then
+  local function scale(factor)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * factor
+  end
+  local modes = { "n", "v", "i", "t" }
+  map(modes, "<D-=>", function() scale(1.1) end, { desc = "Neovide zoom in" })
+  map(modes, "<D-->", function() scale(1 / 1.1) end, { desc = "Neovide zoom out" })
+  map(modes, "<D-0>", function() vim.g.neovide_scale_factor = 1.0 end, { desc = "Neovide zoom reset" })
+end
