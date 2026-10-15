@@ -29,9 +29,25 @@ return {
       },
       -- Remember window size/position
       remember_settings = true,
-      -- Auto refresh on focus
+      -- Refresh automatically after relevant events
       auto_refresh = true,
     },
+    config = function(_, opts)
+      local neogit = require("neogit")
+      neogit.setup(opts)
+
+      vim.api.nvim_create_autocmd("User", {
+        group = vim.api.nvim_create_augroup("neogit_push_refresh", { clear = true }),
+        pattern = "NeogitPushComplete",
+        callback = function()
+          local status = neogit.status.instance()
+          if status then
+            -- Match Neogit's post-fetch delay so its one-second log cache can expire.
+            status:deferred_refresh("push")()
+          end
+        end,
+      })
+    end,
   },
 
   -- Diffview: Side-by-side diff viewer (integrates with Neogit)
