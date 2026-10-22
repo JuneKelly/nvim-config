@@ -26,14 +26,20 @@ return {
             -- action's result: fast-access TODO selection depends on it.
             handler = function(data)
               local lines, by_key, width = { data.title, "" }, {}, #data.title
+              local separators = {}
               for _, item in ipairs(data.items) do
-                local line = ""
                 if item.key then
-                  line = item.key .. "  " .. item.label
+                  local line = item.key .. "  " .. item.label
                   by_key[item.key] = item
+                  width = math.max(width, vim.fn.strdisplaywidth(line))
+                  table.insert(lines, line)
+                else
+                  table.insert(lines, "")
+                  table.insert(separators, #lines)
                 end
-                width = math.max(width, #line)
-                table.insert(lines, line)
+              end
+              for _, i in ipairs(separators) do
+                lines[i] = string.rep("-", width)
               end
               local buf = vim.api.nvim_create_buf(false, true)
               vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
