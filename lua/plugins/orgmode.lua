@@ -4,6 +4,10 @@ return {
     "nvim-orgmode/orgmode",
     event = "VeryLazy",
     ft = { "org" },
+    keys = {
+      { "<leader>oh", function() require("org_pickers").headlines() end, desc = "Org headlines (picker)" },
+      { "<leader>of", function() Snacks.picker.files({ cwd = "~/orgfiles", title = "Org files" }) end, desc = "Org files" },
+    },
     config = function()
       require("orgmode").setup({
         org_agenda_files = "~/orgfiles/**/*",
@@ -17,6 +21,11 @@ return {
             target = "~/orgfiles/journal.org",
             datetree = true,
           },
+        },
+        mappings = {
+          -- Replaced by a snacks picker; see after/ftplugin/org.lua.
+          org = { org_refile = false },
+          capture = { org_capture_refile = false },
         },
         ui = {
           menu = {
@@ -67,5 +76,44 @@ return {
       -- Experimental LSP support (completion, links, etc.)
       vim.lsp.enable("org")
     end,
+  },
+
+  -- Doom-style bullets instead of asterisks
+  {
+    "nvim-orgmode/org-bullets.nvim",
+    ft = "org",
+    opts = {},
+  },
+
+  -- Completion for tags, headlines, links, directives while typing
+  {
+    "saghen/blink.cmp",
+    opts = {
+      sources = {
+        per_filetype = { org = { "orgmode", "buffer", "path" } },
+        providers = {
+          orgmode = {
+            name = "Orgmode",
+            module = "orgmode.org.autocompletion.blink",
+            fallbacks = { "buffer" },
+          },
+        },
+      },
+    },
+  },
+
+  -- Labelled <leader>o groups so the mappings are discoverable
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<leader>o", group = "org" },
+        { "<leader>oi", group = "insert" },
+        { "<leader>ol", group = "link" },
+        { "<leader>on", group = "note" },
+        { "<leader>ox", group = "clock" },
+        { "<leader>ob", group = "babel" },
+      },
+    },
   },
 }
